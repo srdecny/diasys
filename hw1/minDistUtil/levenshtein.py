@@ -54,8 +54,8 @@ def Levenshtein(string1, string2, printAlignment):
                 j-=1
             elif previousCell == "DIAG":
                 if string1[i-1] != string2[j-1]:
-                    #alignment.append(f"Substitute letter {string1[i]} for letter {string2[j],} at index {i-1}")
-                    alignment.append("SWAP")
+                    alignment.append(f"Substitute letter {string1[i]} for letter {string2[j],} at index {i-1}")
+                    #alignment.append("SWAP")
                 i-=1
                 j-=1
         for a in alignment:
