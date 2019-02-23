@@ -9,5 +9,5 @@ parser.add_argument("-A", "--alignment", help="Print alignment.", action="store_
 
 args = parser.parse_args()
 
-Levenshtein(args.string1, args.string2, args.delimiter, args.alignment)
+Levenshtein(args.string1, args.string2, args.alignment)
 
