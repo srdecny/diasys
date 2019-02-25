@@ -11,6 +11,7 @@ def Levenshtein(firstString, secondString, delimiter, printDistance, printAlignm
     words_first = firstString.split(delimiter)
     words_second = secondString.split(delimiter)
 
+    # pad the shorter string with empty words
     for first, second in itertools.zip_longest(words_first, words_second, fillvalue=""):
 
         len1 = len(first) + 1
@@ -40,12 +41,12 @@ def Levenshtein(firstString, secondString, delimiter, printDistance, printAlignm
 
                 distance[i][j] = mindistance
 
-                if mindistance == distance[i-1][j-1] + subCost:
+                if mindistance == distance[i-1][j-1] + subCost: # substitute character
                     backtrack[i][j] = "DIAG"
-                elif mindistance == distance[i-1][j] + 1: # deletion
+                elif mindistance == distance[i-1][j] + 1: # delete character
                     backtrack[i][j] = "DOWN"
                 else:
-                    backtrack[i][j] = "LEFT"
+                    backtrack[i][j] = "LEFT" # add character
 
         minimumDistance = distance[len1-1][len2-1]
 
@@ -65,29 +66,23 @@ def Levenshtein(firstString, secondString, delimiter, printDistance, printAlignm
                 j-=1
             elif previousCell == "DIAG":
                 if first[i-1] != second[j-1]:
-                    alignment.append(f"Substitute character {first[i-1]} for character {second[j-1]} at index {j-1}")
+                    alignment.append(f"Substitute character {second[j-1]} for character {first[i-1]} at index {j-1}")
                     wer["sub"] += 1
                 i-=1
                 j-=1
 
         if (len(alignment)) == 0:
             correctWords += 1
-            
+
     if (printDistance):
-        out.write(f"Minimum edit distance: {minimumDistance}")
+        out.write(f"Minimum edit distance: {minimumDistance}" + '\n')
 
     if (printAlignment):
         if len(alignment) > 0:
-            out.write(f"Alignment for {first} -> {second}")
+            out.write(f"Alignment for {first} -> {second}" + '\n')
         while len(alignment) > 0:
-            out.write(alignment.pop())
+            out.write(alignment.pop() + '\n')
     
     if (printError):
         ratio = (wer["sub"] + wer["add"] + wer["remove"])/(wer["sub"] + wer["remove"] + correctWords)
-        out.write (f"WER: {ratio}")
-
-    out.write('\n')
-
-
-
-
+        out.write (f"WER: {ratio}" + '\n')
