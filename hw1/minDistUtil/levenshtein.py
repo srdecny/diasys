@@ -1,7 +1,8 @@
 from collections import deque
 import itertools
+import sys
 
-def Levenshtein(firstString, secondString, delimiter, printAlignment, printError):
+def Levenshtein(firstString, secondString, delimiter, printDistance, printAlignment, printError, out=sys.stdout):
 
     wer = {"sub" : 0, "add" : 0, "remove" : 0}
     correctWords = 0
@@ -71,18 +72,21 @@ def Levenshtein(firstString, secondString, delimiter, printAlignment, printError
 
         if (len(alignment)) == 0:
             correctWords += 1
-
-    print(f"Minimum edit distance: {minimumDistance}")
+            
+    if (printDistance):
+        out.write(f"Minimum edit distance: {minimumDistance}")
 
     if (printAlignment):
         if len(alignment) > 0:
-            print(f"Alignment for {first} -> {second}")
+            out.write(f"Alignment for {first} -> {second}")
         while len(alignment) > 0:
-            print(alignment.pop())
+            out.write(alignment.pop())
     
     if (printError):
         ratio = (wer["sub"] + wer["add"] + wer["remove"])/(wer["sub"] + wer["remove"] + correctWords)
-        print (f"WER: {ratio}")
+        out.write (f"WER: {ratio}")
+
+    out.write('\n')
 
 
 
