@@ -8,8 +8,8 @@ from entropy import entropy
 
 path = "/home/srdecny/Downloads/data"
 
-def parse_dataset(path_to_root):
-    dataset = {}
+def parse_corpus(path_to_root):
+    corpus = {}
     sentences_count = 0
 
     for day in os.listdir(path_to_root):
@@ -22,13 +22,13 @@ def parse_dataset(path_to_root):
                     sentence = nltk.word_tokenize(turn["output"]["transcript"])
                     sentences_count += 1
                     for word in sentence:
-                        if word in dataset:
-                            dataset[word] += 1
+                        if word in corpus:
+                            corpus[word] += 1
                         else:
-                            dataset[word] = 1
+                            corpus[word] = 1
                     if sentences_count > 10000:
-                        return dataset
-    return dataset
+                        return corpus
+    return corpus
 
-dataset = parse_dataset(path)
-print(entropy(dataset))
+corpus = parse_corpus(path)
+print(entropy(corpus))
