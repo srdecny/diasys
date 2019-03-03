@@ -30,15 +30,3 @@ path = "/home/srdecny/Downloads/dialog-bAbI-tasks"
 for i in range(1, 7):
     corpus = parse_corpus(path, i)
     print(f"Entropy of a task #{i}: " + str(entropy(corpus)))
-                        
-
-
-
-
-
-    
-
-
-
-
-path = "/home/srdecny/Downloads/dialog-bAbI-tasks"
