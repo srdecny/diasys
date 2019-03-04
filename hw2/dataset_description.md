@@ -1,3 +1,6 @@
+# How to obtain the data
+Replace the paths to datasets in the respective scripts and run them.
+
 ## DSTC2
 Entropy: 6.758144480444949
 
